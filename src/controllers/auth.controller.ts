@@ -28,3 +28,15 @@ export const login = async (req: Request, res: Response) => {
         res.render('login', { error: err.message });
     }
 };
+
+
+export const logout = async (req: Request, res: Response) => {
+    try {
+        // const user = await loginUser(req.body);
+        // res.send(`Login successful. Welcome, ${user.username}`);
+        res.redirect('/login')
+
+    } catch (err: any) {
+        res.render('login', { error: err.message });
+    }
+};

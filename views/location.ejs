@@ -24,10 +24,26 @@
     text-align: center;
   ">
     <h2 style="color: #333;">Your Live Location</h2>
+
+    <!-- Logout Button -->
+    <form action="/logout" method="POST" style="position: absolute; top: 20px; right: 20px;">
+      <button type="submit" style="
+        background-color: #dc3545;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      " onmouseover="this.style.backgroundColor='#b02a37'" onmouseout="this.style.backgroundColor='#dc3545'">
+        Logout
+      </button>
+    </form>
+
     <p><strong>Latitude:</strong> <span id="lat">-</span></p>
     <p><strong>Longitude:</strong> <span id="lng">-</span></p>
 
-    <!-- 📍 Map container -->
     <div id="map" style="width: 100%; height: 400px; margin-top: 20px; border-radius: 8px;"></div>
   </div>
 
