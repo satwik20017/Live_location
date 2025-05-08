@@ -12,6 +12,8 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//npx ngrok http http://localhost:7777
+
 
 app.get('/', (req, res) => {
     res.redirect('/login');
