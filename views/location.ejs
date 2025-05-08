@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Live Location</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -11,6 +12,16 @@
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     crossorigin=""
   ></script>
+  <style>
+    @media (max-width: 600px) {
+      body > div {
+        padding: 16px !important;
+      }
+      #map {
+        height: 250px !important;
+      }
+    }
+  </style>
 </head>
 <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background: #f0f2f5; height: 100vh; display: flex; justify-content: center; align-items: center;">
 
@@ -25,7 +36,6 @@
   ">
     <h2 style="color: #333;">Your Live Location</h2>
 
-    <!-- Logout Button -->
     <form action="/logout" method="POST" style="position: absolute; top: 20px; right: 20px;">
       <button type="submit" style="
         background-color: #dc3545;
