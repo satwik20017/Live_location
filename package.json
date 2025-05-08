@@ -1,0 +1,27 @@
+{
+  "name": "realtimelocation_geofencing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/app.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.1",
+    "mysql2": "^3.14.1",
+    "router": "^2.2.0",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.16",
+    "typescript": "^5.8.3"
+  }
+}
