@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { generateToken } from '../utils/jwt';
 import { registerUser, loginUser } from '../services/auth.service';
 
 export const renderLogin = (req: Request, res: Response) => {
@@ -21,19 +22,22 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     try {
         const user = await loginUser(req.body);
-        // res.send(`Login successful. Welcome, ${user.username}`);
-        res.redirect('/location')
+        const token = generateToken({ id: user.id, username: user.username });
 
+        res.cookie('token', token, { httpOnly: true });
+        res.redirect('/location');
     } catch (err: any) {
         res.render('login', { error: err.message });
     }
 };
 
 
+
 export const logout = async (req: Request, res: Response) => {
     try {
         // const user = await loginUser(req.body);
         // res.send(`Login successful. Welcome, ${user.username}`);
+        res.clearCookie('token');
         res.redirect('/login')
 
     } catch (err: any) {

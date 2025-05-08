@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { renderLogin, renderRegister, register, login } from '../controllers/auth.controller';
+import { authenticateJWT } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.get('/location', (req, res) => {
+router.get('/location', authenticateJWT, (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
     res.render('location'); 
 });
 

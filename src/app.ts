@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import authRoutes from '../src/routes/auth.route';
 import locationroute from '../src/routes/location.route'
 import path from 'path';
@@ -11,6 +12,7 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 //npx ngrok http http://localhost:7777
 
