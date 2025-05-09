@@ -4,60 +4,142 @@
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    @media (max-width: 480px) {
-      body > div {
-        padding: 30px 20px !important;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      background: repeating-linear-gradient(360deg, #A7D8F2, #FFB4A2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-blob {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle at 30% 30%, #fbcfe8, #e0c3fc);
+      opacity: 0.15;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: float 12s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-10%, -10%) scale(1); }
+      50% { transform: translate(10%, 10%) scale(1.15); }
+    }
+
+    .login-box {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #f472b6;
+    }
+
+    button {
+      background-color: #9C7DE3;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #7F5BC2;
+    }
+
+    a {
+      margin-top: 16px;
+      display: inline-block;
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #f472b6;
+    }
+
+    .error {
+      background-color: #fee2e2;
+      color: #991b1b;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+      .login-box {
+        padding: 30px 20px;
       }
     }
   </style>
 </head>
-<body style="margin:0; padding:0; box-sizing:border-box; background:#f0f2f5; font-family:Arial, sans-serif; height:100vh; display:flex; justify-content:center; align-items:center;">
+<body>
 
-  <div style="
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  ">
-    <h2 style="margin-bottom: 24px; color: #333;">Login</h2>
+  <div class="background-blob"></div>
+
+  <div class="login-box">
+    <h2>Login</h2>
 
     <% if (error) { %>
-      <p style="color: red; margin-bottom: 16px;"><%= error %></p>
+      <div class="error"><%= error %></div>
     <% } %>
 
-    <form method="POST" action="/login" style="display:flex; flex-direction:column; gap: 16px;">
-      <input name="username" placeholder="Username" required style="
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 16px;
-      "/>
-      <input name="password" type="password" placeholder="Password" required style="
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 16px;
-      "/>
-      <button type="submit" style="
-        background-color: #007bff;
-        color: white;
-        padding: 12px;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      " onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
-        Login
-      </button>
+    <form method="POST" action="/login">
+      <input name="username" placeholder="Username" required />
+      <input name="password" type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
     </form>
 
-    <a href="/register" style="display:block; margin-top:20px; color:#007bff; text-decoration:none;">
-      Create Account
-    </a>
+    <a href="/register">Create Account</a>
   </div>
 
 </body>

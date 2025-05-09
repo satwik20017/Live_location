@@ -13,49 +13,151 @@
     crossorigin=""
   ></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: repeating-linear-gradient(360deg, #A7D8F2, #FFB4A2);
+      color: #333;
+    }
+
+    .background-blob {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle at 30% 30%, #fbcfe8, #e0c3fc);
+      opacity: 0.15;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: float 12s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-15%, -15%) scale(1); }
+      50% { transform: translate(20%, 10%) scale(1.2); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background: repeating-linear-gradient(360deg, #A7D8F2, #FFB4A2);
+      padding: 36px;
+      border: solid 2.5px;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #2a2a2a;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #444;
+      margin: 8px 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 400px;
+      margin-top: 24px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Added line separation */
+    .separator {
+      margin-top: 20px;
+      border-top: 2px solid black;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    form {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+
+    button {
+      background-color: #fa6e6e;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f43f5e;
+    }
+
     @media (max-width: 600px) {
-      body > div {
-        padding: 16px !important;
+      .container {
+        padding: 20px;
       }
+
       #map {
-        height: 250px !important;
+        height: 250px;
+      }
+
+      form {
+        bottom: 12px;
+        right: 12px;
+      }
+
+      .background-blob {
+        width: 400px;
+        height: 400px;
       }
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background: #f0f2f5; height: 100vh; display: flex; justify-content: center; align-items: center;">
+<body>
 
-  <div style="
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    width: 90%;
-    max-width: 800px;
-    text-align: center;
-  ">
-    <h2 style="color: #333;">Your Live Location</h2>
+  <!-- 3D Animated Background Blob -->
+  <div class="background-blob"></div>
 
+  <div class="container">
+    <h2>Your Live Location</h2>
+        <!-- Separator line -->
+        <div class="separator"></div>
+    <p>Tracking in real-time...</p>
     <p><strong>Latitude:</strong> <span id="lat">-</span></p>
     <p><strong>Longitude:</strong> <span id="lng">-</span></p>
+    
 
-    <div id="map" style="width: 100%; height: 400px; margin-top: 20px; border-radius: 8px;"></div>
+
+    <div id="map"></div>
   </div>
 
-  <!-- Logout Button at bottom-right -->
-  <form action="/logout" method="POST" style="position: fixed; bottom: 20px; right: 20px;">
-    <button type="submit" style="
-      background-color: #dc3545;
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    " onmouseover="this.style.backgroundColor='#b02a37'" onmouseout="this.style.backgroundColor='#dc3545'">
-      Logout
-    </button>
+  <form action="/logout" method="POST">
+    <button type="submit">Logout</button>
   </form>
 
   <script>
