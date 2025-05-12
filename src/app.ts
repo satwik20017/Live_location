@@ -4,6 +4,7 @@ import authRoutes from '../src/routes/auth.route';
 import locationroute from '../src/routes/location.route'
 import path from 'path';
 import { mongoConnection, MYSQL } from './dbconnections/mysql';
+import { APIrouter } from './API/api';
 
 const app = express();
 
@@ -21,12 +22,15 @@ app.get('/', (req, res) => {
     res.redirect('/login');
 });
 
+
 app.use(authRoutes);
 app.use(locationroute)
+
 
 mongoConnection();
 MYSQL();
 
+app.use('/api', APIrouter)
 app.listen(7777, () => {
     console.log(`Server connected to PORT: 7777`);
 });
